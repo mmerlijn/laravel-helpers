@@ -21,7 +21,6 @@ class PhoneModel
 
     public function __construct(public ?string $phone, public ?string $city = null)
     {
-
     }
 
     public function get(): string
@@ -39,6 +38,8 @@ class PhoneModel
     public function set(): string
     {
         $value = preg_replace('/[^0-9]/', '', $this->phone);
+        if (strlen($value) > 10) //remove country prefix
+            $value = "0" . preg_replace('/^([3-4]{1}\d{1})/', '', $value);
         if (strlen($value) < 8 and $value) {
             $value = $this->netnummersLijst($this->city) . $value;
         }
@@ -68,6 +69,7 @@ class PhoneModel
     {
         return $this->get();
     }
+
 
     private function netnummersLijst($city)
     {

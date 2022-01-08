@@ -32,6 +32,13 @@ class PhoneCastTest extends TestCase
         $this->assertEquals('', $model->phone);
     }
 
+    public function test_phone_with_country_code_stored_without()
+    {
+        $model = TestModel::factory(['phone' => "+31612345678"])->create();
+        $this->assertDatabaseHas('tests', ['id' => $model->id, 'phone' => "0612345678"]);
+        $this->assertEquals('06 1234 5678', $model->phone);
+    }
+
     public function test_phone_without_kental()
     {
 
