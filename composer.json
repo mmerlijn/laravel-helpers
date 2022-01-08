@@ -1,0 +1,45 @@
+{
+  "name": "mmerlijn/laravel-helpers",
+  "description": "Laravel helpers: casts and facades",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "M.Merlijn",
+      "email": "menno@mmerlijn.nl"
+    }
+  ],
+  "require": {
+    "php": "^8.0"
+  },
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "mmerlijn\\laravelHelpers\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "mmerlijn\\laravelHelpers\\tests\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "illuminate/support": "9.x-dev",
+    "phpunit/phpunit": "9.5.x-dev",
+    "orchestra/testbench": "7.0.x-dev"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "mmerlijn\\laravelHelpers\\LaravelHelpersServiceProvider"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit",
+    "test-f": "vendor/bin/phpunit --filter"
+  },
+  "config": {
+    "sort-packages": true
+  }
+}
