@@ -30,16 +30,7 @@ class Phone implements CastsAttributes
 
     public function get($model, $key, $value, $attributes)
     {
-        //foreach ($this->netnummers as $netnummer) {
-        //    if (str_starts_with($value, $netnummer)) {
-        //        $l = strlen($netnummer);
-        //        $n = ($l == 2 or $l == 3) ? 4 : 3;
-        //        return preg_replace('~^.{' . $l . '}|.{' . $n . '}(?!$)~', '$0 ', $value);
-        //    }
-        //}
-        //$value = preg_replace('~^.{3}|.{4}(?!$)~', '$0 ', $value);
-
-        return new \mmerlijn\laravelHelpers\Classes\Phone($value);
+        return new \mmerlijn\laravelHelpers\Classes\PhoneModel($value);
     }
 
     /**
@@ -53,12 +44,8 @@ class Phone implements CastsAttributes
      */
     public function set($model, $key, $value, $attributes)
     {
-        if (!$value instanceof \mmerlijn\laravelHelpers\Classes\Phone)
-            $value = new \mmerlijn\laravelHelpers\Classes\Phone($value);
-        //$value = preg_replace('/[^0-9]/', '', $value);
-        //if (strlen($value) < 8) {
-        //    $value = $this->netnummersLijst($attributes['city'] ?? "") . $value;
-        //}
+        if (!$value instanceof \mmerlijn\laravelHelpers\Classes\PhoneModel)
+            $value = new \mmerlijn\laravelHelpers\Classes\PhoneModel($value, $attributes['city']);
         return $value->set();
     }
 

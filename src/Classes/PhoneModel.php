@@ -49,15 +49,19 @@ class PhoneModel
     {
 
         $phone = $this->set();
-        if (preg_match('/(06){1}[0-9]{8}/', $phone)) {
-            return $this->withCountryCode($countryCode) . substr($phone, 1, 9);
+        if (!preg_match('/(06){1}[0-9]{8}/', $phone)) {
+            throw new SMSPhoneException('Not a mobile phone: ' . $phone);
         }
-        throw new SMSPhoneException();
+        if (!array_key_exists($countryCode, $this->countryPrefixes)) {
+            throw new SMSPhoneException('Not a valid country code: ' . $countryCode);
+        }
+        return $this->withCountryCode($countryCode);
+
     }
 
     public function withCountryCode(string $countryCode = "nl")
     {
-        return $this->countryPrefixes[strtolower($countryCode)] . $this->phone;
+        return $this->countryPrefixes[strtolower($countryCode)] . preg_replace('/^(0)*/', '', $this->phone);
     }
 
     public function __toString(): string
