@@ -19,7 +19,7 @@ class PhoneModel
     ];
     private $countryPrefixes = ["nl" => "+31", "be" => "+32", "fr" => "+33", "it" => "+39", "de" => "+49"];
 
-    public function __construct(public string $phone, public ?string $city = null)
+    public function __construct(public ?string $phone, public ?string $city = null)
     {
 
     }
@@ -39,10 +39,10 @@ class PhoneModel
     public function set(): string
     {
         $value = preg_replace('/[^0-9]/', '', $this->phone);
-        if (strlen($value) < 8) {
+        if (strlen($value) < 8 and $value) {
             $value = $this->netnummersLijst($this->city) . $value;
         }
-        return $value;
+        return (string)$value;
     }
 
     public function smsPhone(string $countryCode = "nl"): string

@@ -25,6 +25,13 @@ class PhoneCastTest extends TestCase
         $this->assertEquals('06 1231 2312', $model->phone);
     }
 
+    public function test_phone_null_setter_and_getter()
+    {
+        $model = TestModel::factory(['phone' => null])->create();
+        $this->assertDatabaseHas('tests', ['id' => $model->id, 'phone' => ""]);
+        $this->assertEquals('', $model->phone);
+    }
+
     public function test_phone_without_kental()
     {
 
