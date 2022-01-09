@@ -45,7 +45,7 @@ class Phone implements CastsAttributes
     public function set($model, $key, $value, $attributes)
     {
         if (!$value instanceof \mmerlijn\laravelHelpers\Classes\PhoneModel)
-            $value = new \mmerlijn\laravelHelpers\Classes\PhoneModel($value, $attributes['city']);
+            $value = new \mmerlijn\laravelHelpers\Classes\PhoneModel($value, $attributes['city'] ?? null);
         return $value->set();
     }
 

@@ -39,7 +39,7 @@ class PhoneModel
     {
         $value = preg_replace('/[^0-9]/', '', $this->phone);
         if (strlen($value) > 10) //remove country prefix
-            $value = "0" . preg_replace('/^([3-4]{1}\d{1})/', '', $value);
+            $value = "0" . preg_replace('/^([3-4]{1}\d{1}[0]?)/', '', $value);
         if (strlen($value) < 8 and $value) {
             $value = $this->netnummersLijst($this->city) . $value;
         }

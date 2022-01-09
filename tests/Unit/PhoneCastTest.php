@@ -23,6 +23,7 @@ class PhoneCastTest extends TestCase
         $model = TestModel::factory(['phone' => '06 123 123 12'])->create();
         $this->assertDatabaseHas('tests', ['phone' => '0612312312']);
         $this->assertEquals('06 1231 2312', $model->phone);
+
     }
 
     public function test_phone_null_setter_and_getter()
@@ -35,6 +36,10 @@ class PhoneCastTest extends TestCase
     public function test_phone_with_country_code_stored_without()
     {
         $model = TestModel::factory(['phone' => "+31612345678"])->create();
+        $this->assertDatabaseHas('tests', ['id' => $model->id, 'phone' => "0612345678"]);
+        $this->assertEquals('06 1234 5678', $model->phone);
+
+        $model = TestModel::factory(['phone' => "+31(0)612345678"])->create();
         $this->assertDatabaseHas('tests', ['id' => $model->id, 'phone' => "0612345678"]);
         $this->assertEquals('06 1234 5678', $model->phone);
     }
