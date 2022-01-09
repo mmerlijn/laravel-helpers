@@ -108,7 +108,7 @@ class Distance
         return $angle * $earthRadius;
     }
 
-    private function cityCoordinates($city): array
+    public function cityCoordinates($city): array
     {
         switch (strtolower($city)) {
             case "purmerend":
