@@ -15,13 +15,13 @@ class Distance
     {
     }
 
-    public function from(float|string $param1, float|string|null $param2 = null): self
+    public function from(float|string|array $param1, float|string|null $param2 = null): self
     {
         $this->handleInput($param1, $param2, "from");
         return $this;
     }
 
-    public function to(float|string $param1, float|string|null $param2 = null): self
+    public function to(float|string|array $param1, float|string|null $param2 = null): self
     {
         $this->handleInput($param1, $param2, "to");
         return $this;
@@ -63,7 +63,7 @@ class Distance
         if (gettype($lat) == "string") {
             if (is_numeric($lat)) {
                 if (!is_numeric($long)) {
-                    throw new DistanceException('From longitude: ' . $long . " is not valid");
+                    throw new DistanceException('From/To longitude: ' . $long . " is not valid");
                 }
             } else {//city
                 $coor = $this->cityCoordinates($lat);
@@ -75,8 +75,14 @@ class Distance
             }
         } elseif (gettype($lat) == "double") {
             if (!is_numeric($long)) {
-                throw new DistanceException('From longitude: ' . $long . " is not valid");
+                throw new DistanceException('From/To longitude: ' . $long . " is not valid");
             }
+        } elseif (gettype($lat) == "array") {
+            if (!$lat['lat'] or !$lat['long']) {
+                throw new DistanceException('From/To input array doesnt contain keys lat and long');
+            }
+            $long = $lat['long'];
+            $lat = $lat['lat'];
         }
         if ($type == "to") {
             $this->setTo((float)$lat, (float)$long);

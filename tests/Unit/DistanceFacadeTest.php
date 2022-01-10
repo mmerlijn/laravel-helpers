@@ -38,6 +38,11 @@ class DistanceFacadeTest extends TestCase
             ->from(...[52.46591995, 4.96990604343952])
             ->get();
         $this->assertEquals(5.4, $d);
+
+        $d = Distance::to(['lat' => 52.5144, 'long' => 4.9641])
+            ->from(['lat' => 52.46591995, 'long' => 4.96990604343952])
+            ->get();
+        $this->assertEquals(5.4, $d);
     }
 
     public function test_distance_unit_setter()
