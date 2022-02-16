@@ -31,9 +31,24 @@ class NameModelTraitTest extends TestCase
         $p = TestModel::first();
         $p->name->initials = "M.M.";
         $p->save();
-        $this->assertSame('M.M.', $p->name->initials);
+        $this->assertSame('M.M.', $p->name->getInitials());
         $this->assertSame('MM', $p->name->getInitialsForStorage());
         $this->assertDatabaseHas('tests', ['id' => 1, 'initials' => 'MM']);
     }
 
+    public function test_name_formatter()
+    {
+        $p = TestModel::factory()->create();
+
+        $p->name->setSex("F");
+        $p->name->lastname = "de Velden";
+        $p->name->prefix = "van de";
+        $p->name->own_prefix = "";
+        $p->name->own_lastname = "de Groot";
+
+
+        $p->save();
+        $p->refresh();
+        $this->assertDatabaseHas('tests', ['lastname' => 'Velden', 'prefix' => 'van de', 'own_lastname' => "Groot", "own_prefix" => "de"]);
+    }
 }

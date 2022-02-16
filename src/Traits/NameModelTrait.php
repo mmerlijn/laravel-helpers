@@ -15,18 +15,21 @@ trait NameModelTrait
                 initials: $attributes['initials'] ?? "",
                 lastname: $attributes['lastname'] ?? "",
                 prefix: $attributes['prefix'] ?? "",
-                own_lastname: $attributes['own_lastname'],
-                own_prefix: $attributes['own_lastname'],
+                own_lastname: $attributes['own_lastname'] ?? "",
+                own_prefix: $attributes['own_prefix'] ?? "",
                 sex: PatientSexEnum::set($attributes['sex'] ?? "")
             ),
-            set: fn(Name $name) => [
-                'initials' => $name->getInitialsForStorage(),
-                'lastname' => $name->lastname,
-                'prefix' => $name->prefix,
-                'own_lastname' => $name->own_lastname,
-                'own_prefix' => $name->own_prefix,
-                'sex' => $name->sex->value,
-            ],
+            set: function (Name $name) {
+                $name->format();
+                return [
+                    'initials' => $name->initials,
+                    'lastname' => $name->lastname,
+                    'prefix' => $name->prefix,
+                    'own_lastname' => $name->own_lastname,
+                    'own_prefix' => $name->own_prefix,
+                    'sex' => $name->sex->value,
+                ];
+            },
         );
     }
 }
