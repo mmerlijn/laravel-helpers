@@ -4,17 +4,20 @@ namespace mmerlijn\laravelHelpers\tests;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use mmerlijn\laravelHelpers\Casts\Initials;
 use mmerlijn\laravelHelpers\Casts\Phone;
+use mmerlijn\laravelHelpers\Traits\AddressModelTrait;
+use mmerlijn\laravelHelpers\Traits\NameModelTrait;
+use mmerlijn\msgRepo\Enums\PatientSexEnum;
+
 
 class TestModel extends Model
 {
-    use HasFactory;
+    use HasFactory, AddressModelTrait, NameModelTrait;
 
     protected $table = "tests";
     protected $casts = [
-        'initials' => Initials::class,
         'phone' => Phone::class,
+        'sex' => PatientSexEnum::class,
     ];
 
     protected static function newFactory()

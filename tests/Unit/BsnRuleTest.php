@@ -1,10 +1,11 @@
 <?php
 
-namespace mmerlijn\laravelHelpers\Tests\Unit;
+namespace mmerlijn\laravelHelpers\tests\Unit;
 
 use mmerlijn\laravelHelpers\Rules\Bsn;
+use mmerlijn\laravelHelpers\tests\TestCase;
 
-class BsnRuleTest extends \mmerlijn\laravelHelpers\tests\TestCase
+class BsnRuleTest extends TestCase
 {
     public function test_bsn_pass()
     {

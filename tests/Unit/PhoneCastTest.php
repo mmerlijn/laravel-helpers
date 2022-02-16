@@ -2,11 +2,8 @@
 
 namespace mmerlijn\laravelHelpers\tests\Unit;
 
-use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\DB;
-use mmerlijn\laravelHelpers\Casts\Phone;
-use mmerlijn\laravelHelpers\Exceptions\SMSPhoneException;
+
 use mmerlijn\laravelHelpers\tests\TestCase;
 use mmerlijn\laravelHelpers\tests\TestModel;
 
@@ -15,8 +12,7 @@ class PhoneCastTest extends TestCase
 
     use RefreshDatabase;
 
-    //DB::enableQueryLog();
-    //dd(DB::getQueryLog());
+
     public function test_phone_getter_and_setter()
     {
         $this->assertDatabaseCount('tests', 0);
@@ -58,21 +54,8 @@ class PhoneCastTest extends TestCase
         $model = TestModel::factory(['phone' => "0612345678", 'city' => 'Zaandam'])->create();
 
         $this->assertDatabaseHas('tests', ['phone' => '0612345678']);
-        $this->assertEquals('+31612345678', $model->phone->smsPhone());
-        $this->assertEquals("+49612345678", $model->phone->smsPhone('de'));
+        $this->assertEquals('+31612345678', $model->phone->forSms());
+        $this->assertEquals("+49612345678", $model->phone->forSms('de'));
     }
 
-    public function test_SMS_phone_exception()
-    {
-        $model = TestModel::factory(['phone' => "0202345678"])->create();
-        $this->expectExceptionObject(new SMSPhoneException('Not a mobile phone: 0202345678'));
-        $model->phone->smsPhone();
-    }
-
-    public function test_SMS_invalid_country_code()
-    {
-        $model = TestModel::factory(['phone' => "0602345678"])->create();
-        $this->expectExceptionObject(new SMSPhoneException('Not a valid country code: gr'));
-        $model->phone->smsPhone("gr");
-    }
 }

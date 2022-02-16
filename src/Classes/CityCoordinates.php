@@ -14,7 +14,7 @@ class CityCoordinates
      */
     public static function from($city): array
     {
-        return match ($city) {
+        return match (strtolower($city)) {
             "purmerend" => [52.5144, 4.9641],
             "monnickendam" => [52.4555687, 5.0392316],
             "marken" => [52.4589926, 5.1032057],

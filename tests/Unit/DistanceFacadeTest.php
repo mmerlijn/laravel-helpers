@@ -1,8 +1,8 @@
 <?php
 
-namespace mmerlijn\laravelHelpers\Tests\Unit;
+namespace mmerlijn\laravelHelpers\tests\Unit;
 
-use mmerlijn\laravelHelpers\Exceptions\DistanceException;
+use mmerlijn\laravelHelpers\Enums\DistanceUnits;
 use mmerlijn\laravelHelpers\Facades\Distance;
 use mmerlijn\laravelHelpers\tests\TestCase;
 
@@ -49,7 +49,7 @@ class DistanceFacadeTest extends TestCase
     {
         $d = Distance::from("Purmerend")
             ->to("Ilpendam")
-            ->get("m");
+            ->get(DistanceUnits::M);
         $this->assertEquals(5405, $d);
     }
 

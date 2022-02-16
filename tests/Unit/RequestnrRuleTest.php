@@ -1,10 +1,11 @@
 <?php
 
-namespace mmerlijn\laravelHelpers\Tests\Unit;
+namespace mmerlijn\laravelHelpers\tests\Unit;
 
 use mmerlijn\laravelHelpers\Rules\Requestnr;
+use mmerlijn\laravelHelpers\tests\TestCase;
 
-class RequestnrRuleTest extends \mmerlijn\laravelHelpers\tests\TestCase
+class RequestnrRuleTest extends TestCase
 {
     public function test_requestnr_pass()
     {

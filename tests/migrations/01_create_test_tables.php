@@ -19,9 +19,20 @@ return new class extends Migration
         //fast search table
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->string('phone', 20)->nullable();
-            $table->string('city', 40)->nullable();
+            //name
+            $table->enum('sex', ['M', 'F', 'X', ''])->comment('F->female, M->Male, X->other');
             $table->string('initials', 20)->nullable();
+            $table->string('lastname', 80)->nullable();
+            $table->string('own_lastname', 80);
+            $table->string('prefix', 20)->nullable();
+            $table->string('own_prefix', 20)->nullable();
+            //phone
+            $table->string('phone', 20)->nullable();
+            //address
+            $table->string('postcode', 6)->nullable();
+            $table->string('city', 80)->nullable();
+            $table->string('street', 80)->nullable();
+            $table->string('building', 20)->nullable();
             $table->timestamps();
         });
     }
