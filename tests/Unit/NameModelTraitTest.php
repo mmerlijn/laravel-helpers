@@ -25,4 +25,15 @@ class NameModelTraitTest extends TestCase
         $this->assertSame($model->own_lastname, $model->name->own_lastname);
     }
 
+    public function test_initials_storage()
+    {
+        TestModel::factory()->create();
+        $p = TestModel::first();
+        $p->name->initials = "M.M.";
+        $p->save();
+        $this->assertSame('M.M.', $p->name->initials);
+        $this->assertSame('MM', $p->name->getInitialsForStorage());
+        $this->assertDatabaseHas('tests', ['id' => 1, 'initials' => 'MM']);
+    }
+
 }
