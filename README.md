@@ -1,5 +1,26 @@
 # Laravel Helpers
 
+### Summary
+
+Casts
+
+- Phone Rules
+
+Rules
+
+- Bsn
+- Requestnr
+
+Facades
+
+- Distance
+
+# install
+
+```
+composer require mmerlijn/laravel-helpers
+```
+
 ## Casts
 
 ### Phone

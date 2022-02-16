@@ -23,7 +23,7 @@ class Requestnr implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         $requestnr = trim($value);
         if (preg_match('/^((ZD|ZP|CW){1}\d{8}|(PG){1}\d{9})$/i', $requestnr)) {
@@ -37,7 +37,7 @@ class Requestnr implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'Aanvraagnummer is niet geldig';
     }

@@ -23,7 +23,7 @@ class Bsn implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes($attribute, $value): bool
     {
         $bsn = trim($value);
         if ($bsn) {
@@ -53,7 +53,7 @@ class Bsn implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return 'Dit is geen geldig BSN nummer';
     }
