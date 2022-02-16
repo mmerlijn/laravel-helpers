@@ -20,7 +20,7 @@ trait NameModelTrait
                 sex: PatientSexEnum::set($attributes['sex'] ?? "")
             ),
             set: fn(Name $name) => [
-                'initials' => $name->initials,
+                'initials' => $name->getInitialsForStorage(),
                 'lastname' => $name->lastname,
                 'prefix' => $name->prefix,
                 'own_lastname' => $name->own_lastname,

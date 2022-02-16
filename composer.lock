@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "mmerlijn/msg-repo",
-            "version": "v1.4",
+            "version": "v1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mmerlijn/msg-repo.git",
-                "reference": "4fe66059103ab2ffafa5b40f2eedaee3e4b70c40"
+                "reference": "1e0f4e4a495b51c325bd38eb9e87c9130219fa3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mmerlijn/msg-repo/zipball/4fe66059103ab2ffafa5b40f2eedaee3e4b70c40",
-                "reference": "4fe66059103ab2ffafa5b40f2eedaee3e4b70c40",
+                "url": "https://api.github.com/repos/mmerlijn/msg-repo/zipball/1e0f4e4a495b51c325bd38eb9e87c9130219fa3a",
+                "reference": "1e0f4e4a495b51c325bd38eb9e87c9130219fa3a",
                 "shasum": ""
             },
             "require": {
@@ -46,9 +46,9 @@
             "description": "Dutch healthcare read/write edifact to/from repository",
             "support": {
                 "issues": "https://github.com/mmerlijn/msg-repo/issues",
-                "source": "https://github.com/mmerlijn/msg-repo/tree/v1.4"
+                "source": "https://github.com/mmerlijn/msg-repo/tree/v1.6"
             },
-            "time": "2022-02-16T13:37:57+00:00"
+            "time": "2022-02-16T15:34:07+00:00"
         },
         {
             "name": "nesbot/carbon",
