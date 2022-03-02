@@ -17,7 +17,8 @@ trait NameModelTrait
                 prefix: $attributes['prefix'] ?? "",
                 own_lastname: $attributes['own_lastname'] ?? "",
                 own_prefix: $attributes['own_prefix'] ?? "",
-                sex: PatientSexEnum::set($attributes['sex'] ?? "")
+                sex: PatientSexEnum::set($attributes['sex'] ?? ""),
+                salutation: PatientSexEnum::set($attributes['sex'] ?? '')->namePrefix(),
             ),
             set: function (Name $name) {
                 $name->format();
