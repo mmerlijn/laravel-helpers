@@ -15,6 +15,11 @@ Facades
 
 - Distance
 
+Traits
+
+- AddressModelTrait
+- NameModelTrait
+
 # install
 
 ```
@@ -120,4 +125,51 @@ The get method accepts three params: unit, format,precision
 ```php
 ->get(unit:"m"); //distance in meter (default km)
 ->get(format:true) // 5,4 km
+```
+
+## Traits
+
+### AddressModelTrait
+
+#### Required database fields
+
+city, street, building, postcode
+
+##### installation
+
+Add to your model
+
+```php
+use AddressModelTrait;
+```
+
+This will trigger an attribute setter and getter.
+
+##### Usage
+
+```php
+$model->address->street;
+```
+
+### NameModelTrait
+
+#### Required database fields
+
+initials, lastname, prefix, own_lastname, own_prefix, sex
+
+##### installation
+
+Add to your model
+
+```php
+use NameModelTrait;
+```
+
+This will trigger an attribute setter and getter.
+
+##### Usage
+
+```php
+$model->name->salutation; // Dhr. / Mevr.
+$model->name->name; //Full name 
 ```

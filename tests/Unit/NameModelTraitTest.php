@@ -51,4 +51,5 @@ class NameModelTraitTest extends TestCase
         $p->refresh();
         $this->assertDatabaseHas('tests', ['lastname' => 'Velden', 'prefix' => 'van de', 'own_lastname' => "Groot", "own_prefix" => "de"]);
     }
+
 }

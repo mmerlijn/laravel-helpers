@@ -22,11 +22,11 @@ trait NameModelTrait
             set: function (Name $name) {
                 $name->format();
                 return [
-                    'initials' => $name->initials,
-                    'lastname' => $name->lastname,
-                    'prefix' => $name->prefix,
-                    'own_lastname' => $name->own_lastname,
-                    'own_prefix' => $name->own_prefix,
+                    'initials' => $name->initials ?: null,
+                    'lastname' => $name->lastname ?: null,
+                    'prefix' => $name->prefix ?: null,
+                    'own_lastname' => $name->own_lastname ?: null,
+                    'own_prefix' => $name->own_prefix ?: null,
                     'sex' => $name->sex->value,
                 ];
             },

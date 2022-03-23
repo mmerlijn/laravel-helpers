@@ -17,10 +17,10 @@ trait AddressModelTrait
                 street: $attributes['street'] ?? '',
                 city: $attributes['city'] ?? ''),
             set: fn(Address $address) => [
-                'street' => $address->street,
-                'postcode' => $address->postcode,
-                'city' => $address->city,
-                'building' => $address->building
+                'street' => $address->street ?: null,
+                'postcode' => $address->postcode ?: null,
+                'city' => $address->city ?: null,
+                'building' => $address->building ?: null
             ],
         );
     }
