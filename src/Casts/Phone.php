@@ -19,7 +19,7 @@ class Phone implements CastsAttributes
 
     public function get($model, $key, $value, $attributes)
     {
-        return new \mmerlijn\msgRepo\Phone($value);
+        return new \mmerlijn\msgRepo\Phone(number: $value);
     }
 
     /**

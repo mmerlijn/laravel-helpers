@@ -13,7 +13,6 @@ class TestModelFactory extends \Illuminate\Database\Eloquent\Factories\Factory
     public function definition()
     {
         $cities = ["Purmerend", "Hoorn", "Zaandam", "Amsterdam", "Uitgeest"];
-        $this->faker = \Faker\Factory::create('nl_NL');
         return [
             'city' => $this->faker->randomElement($cities),
             'phone' => $this->faker->phoneNumber,

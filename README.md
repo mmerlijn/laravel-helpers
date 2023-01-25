@@ -26,6 +26,43 @@ Traits
 composer require mmerlijn/laravel-helpers
 ```
 
+## For flash message
+
+add to app.js
+
+```js
+import flashHandler from '../../vendor/mmerlijn/laravel-helpers/resources/js/flashHandler';
+
+Alpine.data('flashHandler', flashHandler)
+window.flash = msg => window.dispatchEvent(new CustomEvent('flash', {detail: msg}))
+```
+
+add to the preferred layout.blade (bottom of body)
+
+```html
+
+<x-mm-flash/>
+```
+
+### Flash usage
+
+```php
+Flash::message('Hello World')->type('noticee')->add();
+```
+
+or
+
+```html
+
+<button x-data="{}" @click="$dispatch('flash',{text:'Hi'})">Click me</button>
+```
+
+or
+
+```js
+flash('Hi, all!')
+```
+
 ## Casts
 
 ### Phone
@@ -118,6 +155,22 @@ Distance::from(52.4968, 5.0727)
 Distance::from("Volendam")
     ->to("Purmerend")
     ->get();
+```
+
+The get method accepts three params: unit, format,precision
+
+### Flash
+
+Adds a flash message to the session flash
+
+##### usage
+
+```php
+//with coordinates
+Flash::message('Hello World')
+    ->type('success')
+    ->duration(3000)
+    ->add();
 ```
 
 The get method accepts three params: unit, format,precision
