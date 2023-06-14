@@ -13,6 +13,7 @@ trait NameModelTrait
         return new Attribute(
             get: fn($value, $attributes) => new Name(
                 initials: $attributes['initials'] ?? "",
+                firstname: $attributes['firstname'] ?? "",
                 lastname: $attributes['lastname'] ?? "",
                 prefix: $attributes['prefix'] ?? "",
                 own_lastname: $attributes['own_lastname'] ?? "",
