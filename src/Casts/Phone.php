@@ -4,6 +4,7 @@
 namespace mmerlijn\laravelHelpers\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
+use Illuminate\Database\Eloquent\Model;
 
 
 class Phone implements CastsAttributes
@@ -11,7 +12,7 @@ class Phone implements CastsAttributes
     /**
      * Cast the given value.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Model $model
      * @param string $key
      * @param mixed $value
      * @param array $attributes
@@ -25,7 +26,7 @@ class Phone implements CastsAttributes
     /**
      * Prepare the given value for storage.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param Model $model
      * @param string $key
      * @param mixed $value
      * @param array $attributes

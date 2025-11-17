@@ -13,9 +13,9 @@ trait AddressModelTrait
         return new Attribute(
             get: fn($value, $attributes) => new Address(
                 postcode: $attributes['postcode'] ?? '',
-                building: $attributes['building'] ?? '',
+                city: $attributes['city'] ?? '',
                 street: $attributes['street'] ?? '',
-                city: $attributes['city'] ?? ''),
+                building: $attributes['building'] ?? ''),
             set: fn(Address $address) => [
                 'street' => $address->street ?: null,
                 'postcode' => $address->postcode ?: null,

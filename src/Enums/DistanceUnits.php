@@ -11,6 +11,9 @@ enum DistanceUnits: int
     case DAM = 10;
     case M = 1;
 
+    /**
+     * @throws DistanceException
+     */
     public static function set(string $unit)
     {
         return match (strtolower($unit)) {

@@ -13,14 +13,17 @@ enum FlashTypes: string
 
     case debug = "debug";
 
-    public static function set(string $type)
+    /**
+     * @throws \Exception
+     */
+    public static function set(string $type): FlashTypes
     {
         return match (strtolower($type)) {
             "notice", "notify", "debug" => self::notice,
             "danger", "error" => self::danger,
             "success" => self::success,
             "alert", "warning" => self::alert,
-            default => throw new Exception("INVALID FlashType " . $type . " only except: danger, success, alert, notice")
+            default => throw new \Exception("INVALID FlashType " . $type . " only except: danger, success, alert, notice")
         };
     }
 }

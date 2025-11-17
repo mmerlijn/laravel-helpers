@@ -2,7 +2,6 @@
 
 namespace mmerlijn\laravelHelpers\Classes;
 
-use mmerlijn\laravelHelpers\Exceptions\SMSPhoneException;
 
 class PhoneModel
 {
@@ -51,10 +50,10 @@ class PhoneModel
 
         $phone = $this->set();
         if (!preg_match('/(06){1}[0-9]{8}/', $phone)) {
-            throw new SMSPhoneException('Not a mobile phone: ' . $phone);
+            throw new \Exception('Not a mobile phone: ' . $phone);
         }
         if (!array_key_exists($countryCode, $this->countryPrefixes)) {
-            throw new SMSPhoneException('Not a valid country code: ' . $countryCode);
+            throw new \Exception('Not a valid country code: ' . $countryCode);
         }
         return $this->withCountryCode($countryCode);
 
