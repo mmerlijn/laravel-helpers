@@ -2,38 +2,29 @@
 
 namespace mmerlijn\laravelHelpers\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class Bsn implements Rule
+class Bsn implements ValidationRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    private bool $strict = true;
 
-    /**
-     * Determine if the validation rule passes.
-     *
-     * @param string $attribute
-     * @param mixed $value
-     * @return bool
-     */
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $bsn = trim($value);
         if ($bsn) {
             // lijst met nummers die qua check kloppen, maar toch niet geldig zijn
-            $aInvalid = array('111111110',
+            $aInvalid = [
+                '111111110',
                 '999999990',
-                '000000000');
+                '000000000'
+            ];
+            if (!$this->strict) {
+                $aInvalid[] = '999999999';
+            }
             $bsn = strlen($bsn) < 9 ? '0' . $bsn : $bsn;
             if (strlen($bsn) != 9 || !ctype_digit($bsn) || in_array($bsn, $aInvalid)) {
-                return false;
+                $fail($this->msg());
             }
             $result = 0;
             $products = range(9, 2);
@@ -42,19 +33,24 @@ class Bsn implements Rule
             foreach (str_split($bsn) as $i => $char) {
                 $result += (int)$char * $products[$i];
             }
-
-            return $result % 11 === 0;
+            if (!($result % 11 === 0)) {
+                $fail($this->msg());
+            };
         }
-        return true;
     }
 
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message(): string
+    public function strict(bool $strict = true): Bsn
     {
-        return 'Dit is geen geldig BSN nummer';
+        $this->strict = $strict;
+        return $this;
+    }
+
+    private function msg(): string
+    {
+        if ($this->strict) {
+            return 'Dit is geen geldig BSN nummer';
+        } else {
+            return 'Dit is geen geldig BSN nummer, bij onbekend BSN gebruik 999999999';
+        }
     }
 }

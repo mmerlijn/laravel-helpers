@@ -2,43 +2,16 @@
 
 namespace mmerlijn\laravelHelpers\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class Requestnr implements Rule
+class Requestnr implements ValidationRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
-     * Determine if the validation rule passes.
-     *
-     * @param string $attribute
-     * @param mixed $value
-     * @return bool
-     */
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $requestnr = trim($value);
-        if (preg_match('/^((ZD|ZP|CW){1}\d{8}|(PG){1}\d{9})$/i', $requestnr)) {
-            return true;
+        if (!preg_match('/^((ZD|ZP|CW)\d{8}|(PG)\d{9})$/i', $requestnr)) {
+            $fail('Geen geldig aanvraagnummer.');
         }
-        return false;
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message(): string
-    {
-        return 'Aanvraagnummer is niet geldig';
     }
 }

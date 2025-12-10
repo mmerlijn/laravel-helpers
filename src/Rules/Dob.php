@@ -1,44 +1,47 @@
 <?php
 
-namespace mmerlijn\laravelHelpers\Rules;
+namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Carbon\Carbon;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class Dob implements Rule
+class Dob implements ValidationRule
 {
-    /**
-     * Create a new rule instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+    protected int $maxBeforeYears = 120;
+    protected int $minBeforeYears = 0;
 
-    /**
-     * Determine if the validation rule passes.
-     *
-     * @param string $attribute
-     * @param mixed $value
-     * @return bool
-     */
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $requestnr = trim($value);
-        if (preg_match('/^((ZD|ZP|CW){1}\d{8}|(PG){1}\d{9})$/i', $requestnr)) {
-            return true;
+        try {
+            $dob = Carbon::parse($value)->startOfDay();
+        } catch (\Exception $e) {
+            $fail($e->getMessage());
+            return;
         }
-        return false;
+        if ($dob->isBefore(now()->subYears($this->maxBeforeYears))) {
+            $fail('Ongeldige geboortedatum');
+        }
+        if ($this->minBeforeYears) {
+            if ($dob->isAfter(now()->subYears($this->minBeforeYears))) {
+                $fail('Cliënten onder de ' . $this->minBeforeYears . ' jaar kunnen alleen telefonisch een afspraak maken, bel voor een afspraak: ' . config('salt.phone'));
+            }
+        }
+        if ($dob->isAfter(now())) {
+            $fail('Datum is in de toekomst');
+        }
     }
 
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message(): string
+    public function maxBefore(int $years): ValidationRule
     {
-        return 'Aanvraagnummer is niet geldig';
+        $this->maxBeforeYears = $years;
+
+        return $this;
+    }
+
+    public function minBefore(int $years): ValidationRule
+    {
+        $this->minBeforeYears = $years;
+        return $this;
     }
 }
