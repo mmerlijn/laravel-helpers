@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Rules;
+namespace mmerlijn\laravelHelpers\Rules;
 
 use Carbon\Carbon;
 use Closure;
