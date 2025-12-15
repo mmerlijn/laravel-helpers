@@ -17,10 +17,11 @@ class Bsn implements ValidationRule
             $aInvalid = [
                 '111111110',
                 '999999990',
-                '000000000'
+                '000000000',
+                '999999999'
             ];
             if (!$this->strict) {
-                $aInvalid[] = '999999999';
+                $aInvalid[] = '000000000';
             }
             $bsn = strlen($bsn) < 9 ? '0' . $bsn : $bsn;
             if (strlen($bsn) != 9 || !ctype_digit($bsn) || in_array($bsn, $aInvalid)) {
@@ -50,7 +51,7 @@ class Bsn implements ValidationRule
         if ($this->strict) {
             return 'Dit is geen geldig BSN nummer';
         } else {
-            return 'Dit is geen geldig BSN nummer, bij onbekend BSN gebruik 999999999';
+            return 'Dit is geen geldig BSN nummer, bij onbekend BSN gebruik 000000000 (9x0)';
         }
     }
 }
