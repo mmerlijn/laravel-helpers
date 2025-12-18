@@ -12,7 +12,7 @@ class Toast implements ToastInterface
     {
     }
 
-    public function flash(string $message = "", int $duration = 5000, ToastTypeEnum $type = ToastTypeEnum::INFO, ToastPositionEnum $position = ToastPositionEnum::TOP_RIGHT): self
+    public function flash(string $message = "", int $duration = 5000, ToastTypeEnum $type = ToastTypeEnum::INFO, string $title = '', ToastPositionEnum $position = ToastPositionEnum::TOP_RIGHT): self
     {
         $toasts = session('toasts', []);
         $toasts[] = [
@@ -20,6 +20,7 @@ class Toast implements ToastInterface
             'duration' => $duration,
             'type' => $type,
             'position' => $position,
+            'title' => '',
         ];
         session()->flash('toasts', $toasts);
         return $this;
@@ -58,8 +59,9 @@ class Toast implements ToastInterface
                         'type' => 'error',
                         'message' => $error,
                         'duration' => $duration,
+                        'title' => 'Validatie error'
                     ];
-                    $duration += 2000;
+                    $duration += 3000;
                 }
             }
         }
