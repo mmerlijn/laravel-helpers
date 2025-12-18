@@ -12,7 +12,7 @@ class Toast implements ToastInterface
     {
     }
 
-    public function flash(string $message = "", int $duration = 5000, ToastTypeEnum $type = ToastTypeEnum::INFO, string $title = '', ToastPositionEnum $position = ToastPositionEnum::TOP_RIGHT): self
+    public function flash(string $message = "", ToastTypeEnum $type = ToastTypeEnum::INFO, string $title = '', int $duration = 5000, ToastPositionEnum $position = ToastPositionEnum::TOP_RIGHT): self
     {
         $toasts = session('toasts', []);
         $toasts[] = [
