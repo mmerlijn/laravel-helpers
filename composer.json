@@ -10,8 +10,7 @@
     }
   ],
   "require": {
-    "php": "^8.2",
-    "mmerlijn/msg-repo": "~3.0"
+    "php": "^8.2"
   },
   "minimum-stability": "dev",
   "autoload": {
